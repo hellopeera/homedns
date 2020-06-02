@@ -14,7 +14,7 @@ services:
       - TUNNEL_DNS_PORT=53
       - TUNNEL_METRICS=0.0.0.0:10080
       - TUNNEL_DNS_UPSTREAM=https://security.cloudflare-dns.com/dns-query,https://security.cloudflare-dns.com/dns-query
-      - TUNNEL_DNS_BOOTSTRAP=https://1.1.1.1/dns-query,https://1.0.0.2/dns-query
+      - TUNNEL_DNS_BOOTSTRAP=https://1.1.1.1/dns-query,https://1.0.0.1/dns-query
     restart: always
     dns:
       - 1.1.1.1
