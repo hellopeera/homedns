@@ -32,7 +32,6 @@ services:
       - 53:53/udp
       - 53:53/tcp
       - 80:80
-      - 443:443
     networks:
       dns_network:
         ipv4_address: 172.18.0.3
