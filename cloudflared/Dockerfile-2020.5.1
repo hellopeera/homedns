@@ -7,7 +7,7 @@ ARG CLOUDFLARED_SOURCE=https://github.com/cloudflare/cloudflared/archive/
 
 ENV CGO_ENABLED 0
 
-RUN apk add --no-cache build-base=0.5-r1 curl=7.67.0-r0 \
+RUN apk add --no-cache build-base=0.5-r2 curl=7.69.1-r0 \
 	&& curl -L "${CLOUDFLARED_SOURCE}${CLOUDFLARED_VERSION}.tar.gz" -o /tmp/cloudflared.tar.gz \
 	&& tar xzf /tmp/cloudflared.tar.gz --strip 1 \
 	&& make cloudflared VERSION="${CLOUDFLARED_VERSION}"
