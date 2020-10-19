@@ -3,8 +3,8 @@ services:
   cloudflared:
     build: 
       context: ./cloudflared
-      dockerfile: Dockerfile-2020.5.1
-    image: cloudflared:2020.5.1
+      dockerfile: Dockerfile-2020.10.0
+    image: cloudflared:2020.10.0
     networks:
       dns_network:
         ipv4_address: 172.18.0.2
@@ -13,7 +13,8 @@ services:
       - TUNNEL_DNS_ADDRESS=0.0.0.0
       - TUNNEL_DNS_PORT=53
       - TUNNEL_METRICS=0.0.0.0:10080
-      - TUNNEL_DNS_UPSTREAM=https://security.cloudflare-dns.com/dns-query,https://security.cloudflare-dns.com/dns-query
+      - TUNNEL_DNS_UPSTREAM=https://dns.google/dns-query,https://dns.google/dns-query
+      #- TUNNEL_DNS_UPSTREAM=https://security.cloudflare-dns.com/dns-query,https://security.cloudflare-dns.com/dns-query
       - TUNNEL_DNS_BOOTSTRAP=https://1.1.1.1/dns-query,https://1.0.0.1/dns-query
     restart: always
     dns:
