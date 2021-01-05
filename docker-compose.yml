@@ -2,9 +2,9 @@ version: '3.8'
 services:
   cloudflared:
     build: 
-      context: ./cloudflared
-      dockerfile: Dockerfile-2020.10.0
-    image: cloudflared:2020.10.0
+      context: /opt/dns/cloudflared
+      dockerfile: Dockerfile-2020.11.11
+    image: cloudflared:2020.11.11
     networks:
       dns_network:
         ipv4_address: 172.18.0.2
@@ -13,8 +13,9 @@ services:
       - TUNNEL_DNS_ADDRESS=0.0.0.0
       - TUNNEL_DNS_PORT=53
       - TUNNEL_METRICS=0.0.0.0:10080
-      - TUNNEL_DNS_UPSTREAM=https://dns.google/dns-query,https://dns.google/dns-query
+      - TUNNEL_DNS_UPSTREAM=https://cloudflare-dns.com/dns-query
       #- TUNNEL_DNS_UPSTREAM=https://security.cloudflare-dns.com/dns-query,https://security.cloudflare-dns.com/dns-query
+      #- TUNNEL_DNS_UPSTREAM=https://dns.google/dns-query,https://dns.google/dns-query 
       - TUNNEL_DNS_BOOTSTRAP=https://1.1.1.1/dns-query,https://1.0.0.1/dns-query
     restart: always
     dns:
@@ -28,7 +29,7 @@ services:
       start_period: 1s 
 
   pihole:
-    image: pihole/pihole:v5.0
+    image: pihole/pihole:v5.1.2
     ports:
       - 53:53/udp
       - 53:53/tcp
@@ -50,22 +51,22 @@ services:
     depends_on:
       - cloudflared
 
-  pihole-exporter:
-    build:
-      context: ./pihole-exporter
-      dockerfile: Dockerfile
-    image: pihole-exporter:latest
-    networks:
-      dns_network:
-        ipv4_address: 172.18.0.4
-    environment:
-      - TZ=Asia/Bangkok
-      - PIHOLE_HOSTNAME=pihole
-      - PIHOLE_API_TOKEN=
-      - INTERVAL=15s
-    restart: always
-    depends_on:
-      - pihole
+#  pihole-exporter:
+#    build:
+#      context: ./pihole-exporter
+#      dockerfile: Dockerfile
+#    image: pihole-exporter:latest
+#    networks:
+#      dns_network:
+#        ipv4_address: 172.18.0.4
+#    environment:
+#      - TZ=Asia/Bangkok
+#      - PIHOLE_HOSTNAME=pihole
+#      - PIHOLE_API_TOKEN=
+#      - INTERVAL=15s
+#    restart: always
+#    depends_on:
+#      - pihole
 
 networks:
   dns_network:
