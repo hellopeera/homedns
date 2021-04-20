@@ -3,8 +3,8 @@ services:
   cloudflared:
     build: 
       context: /opt/dns/cloudflared
-      dockerfile: Dockerfile-2020.11.11
-    image: cloudflared:2020.11.11
+      dockerfile: Dockerfile-2021.4.0
+    image: cloudflared:2021.4.0
     networks:
       dns_network:
         ipv4_address: 172.18.0.2
